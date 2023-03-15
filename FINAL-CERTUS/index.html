@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="icon" type="image/png" href="img/read/mario_mirando.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <title>Login Certus</title>
+</head>
+<body>
+    <div class="login" id="div1">
+        <img src="img/read/mario_mirando.png" id="mario" alt="">
+        <form class="formulario" id="register-form">
+            <label>Usuario</label>
+            <input type="text" id="input-usuario" oninput="validarLetras()" onblur="borrarMensaje()" placeholder="Registrar Usuario" autocomplete="off" >
+            <div id="myAlert"></div>
+            <label>Contraseña</label>
+            <input type="password" id="input-clave" placeholder="Registar Contraseña" >
+            <button id="btn" type="button" onclick="redireccion()" style="display: none;">Login</button>
+            <button type="submit" onclick="ocultar()">Registrarse</button>
+        </form>
+    </div>
+    <div class="login" id="div2" style="display: none;">
+        <img src="img/read/mario_mirando.png" id="mario" alt="">
+        <form class="formulario" id="login-form">
+            <label>Usuario</label>
+            <input type="text" id="input-usuario2" placeholder="Usuario" autocomplete="off" >
+            <label>Contraseña</label>
+            <input type="password" id="input-clave2" placeholder="Contraseña" >
+            <button type="submit" onclick="redireccion()">Login</button>
+            <button type="submit" onclick="ocultar2()">Registrarse</button>
+        </form>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
+<!-- CREADO POR LUIS ADRIAN CARBAJAL SALDAÑA - CERTUS -->

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/catalogo-estilos.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="shortcut icon" href="img/comprar.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/808781cc1c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <!-- <a href="#" class="logo">Compras</a> -->
+            <i class="bx bx-shopping-bag" id="cart-icon"><i id="presionar">Ir a productos</i></i>
+            
+            <li class="dropdown-btn" id="usuario"></li>
+            <div class="dropdown-list">
+            <ul>
+              <li data-url="index.html" class="salir">Salir</li>
+            </ul>
+          </div>
+          
+    </header>
+    
+    <div class="container">
+
+    <div id="product-text-container2">
+    </div>
+	<div id="paypal-button-container">
+    <div class="total-price" id="precio_total">
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <p>Pasarela de Pagos</p>
+    
+  </div>
+</footer>
+</body>
+
+<script src="js/main-catalogo.js"></script>
+<script src="js/main.js"></script>
+<script>
+   var cartContentHTML = localStorage.getItem('cartContentHTML');
+   var totalPriceText = localStorage.getItem('totalPriceText');
+   var divTexto = document.getElementById("text");
+   document.getElementById('product-text-container2').innerHTML = cartContentHTML;
+   document.getElementsByClassName('total-price')[0].innerHTML = totalPriceText;
+   var precioSinSimbolo = parseFloat(totalPriceText.substring(2));
+  
+</script>
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=AZe80Ds7T6dCYl46QykNPt-npYoU44DJpNcnZjlP9MXl_mCX7o-1Bz6k4UCYYra4nvZXfs4T9bd3emCY"></script>
+<script>
+   var totalPriceText = localStorage.getItem('totalPriceText');
+   var precioSinSimbolo = parseFloat(totalPriceText.substring(2));
+   var precioDividido = precioSinSimbolo / 3.70;
+
+  precioDividido = Math.round(precioDividido * 100) / 100;
+paypal.Buttons({
+	createOrder: function(data, actions) {
+		return actions.order.create({
+			purchase_units: [{
+				amount: {
+					value: precioDividido.toFixed(2) 
+				}
+			}]
+		});
+	},
+  style: {
+		shape: 'pill',
+		color: 'gold',
+		layout: 'vertical',
+		label: 'paypal',
+	  },
+	onApprove: function(data, actions) {
+		return actions.order.capture().then(function(details) {
+			alert('Pago realizado correctamente. ID de transacción: ' + details.id);
+		});
+	}
+}).render('#paypal-button-container');
+</script>
+<script>
+  const presionar = document.getElementById("presionar");
+  presionar.addEventListener("click", function() {
+    window.location.href = "productos.html";
+  });
+
+  var dropdownItems = document.querySelectorAll('.dropdown-list li');
+dropdownItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var url = this.getAttribute('data-url');
+      window.location.href = url;
+    });
+  });
+  const usuarioElement = document.getElementById("usuario");
+
+// Obtener el valor del usuario almacenado en el localStorage
+const usuario = localStorage.getItem("username");
+
+// Asignar el valor obtenido al elemento HTML
+usuarioElement.textContent = usuario;
+var dropdownBtn = document.querySelector('.dropdown-btn');
+
+dropdownBtn.addEventListener('click', function() {
+  this.classList.toggle('active');
+});
+</script>
+<style>
+    
+    .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+  #product-text-container2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+
+    padding: 20px;
+    height: 200px;
+    width: 300px;
+  }
+  #paypal-button-container {
+  
+    background-color: #f2f2f2;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 160px;
+    width: 250px;
+    top: 14rem;
+    margin-right: 24rem;
+  }
+  .total-price {
+
+    position: fixed;
+    background-color: #f2f2f2;
+    color: black;
+    border-radius: 100px;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    margin-bottom: 13rem;
+    margin-left: 50%;
+    top: -4rem;
+    right: 5rem;
+  }
+  #product-text-container2, #paypal-button-container, .total-price {
+    margin-top: 20px;
+  }
+  
+  #product-text-container2 {
+    display: flex;
+  }
+  
+.cart-remove,.cart-quantity,.cart-price{
+  display: none;
+}
+.cart-img, .cart-product-title , .cart-price{
+  position: relative;
+  top: 10rem;
+}
+.cart-price , .cart-product-title{
+  position: relative;
+  left: -20rem;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color:black;
+  color: #fff;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+</style>
+
+</html>
