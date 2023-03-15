@@ -1,6 +1,6 @@
 # Final-Certus-JS
 Final-Certus-JS
-Al iniciar registras tu usario para poder ingresar con funciones de validacion
+Al iniciar registras tu usario para poder ingresar con funciones de validacion <br>
 En la parte superior izquierda aparece tu usuario y el boton salir
 Al hacer enter en la busqueda automaticamente busca , al hacer escape borra el texto 
 Click en el icono de compra se agrega al carrito 
